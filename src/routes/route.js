@@ -1,53 +1,91 @@
 const express = require('express');
 
-const problem1 = require("../logger/logger")
-const problem2 = require("../util/helper")
-const problem3 = require("../validtor/formatter") 
-
-
 const router = express.Router();
 
-router.get('/test-me', function (req, res) {
+// Problem No-1
 
-    problem1.opq ()
+router.get('/movies', function (req, res) {
 
-    problem2.abc ()
-    problem2.def ()
-    problem2.ghi ()
-
-    problem3.abc ()
-    problem3.def ()
-    problem3.ghi ()
-
-res.send("this is my first api!")
+    let movies = ["The Shining", "Batman", "The Persuit of Happiness", "Avatar"]
+    
+res.send(movies)
 
 });
 
+// Problem No-2 + Problem No-3
 
+router.get('/movies/:indexNumber', function (req, res) {
 
-router.get('/hello', function (req, res) {
-    let months = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"];
+    let movies = ["The Shining", "Batman", "The Persuit of Happiness", "Avatar"]
+    let movieIndex = req.params.indexNumber
 
-    let _ = require("lodash");
-    console.log(_.chunk(months, months.length / 4));
-
-    let oddNoArray = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
-    console.log(_.tail(oddNoArray))
-
-    let unionFx = function (...a) {
-        return _.union(...a);
+    let finalMovies = " ";
+    if (movieIndex < movies.length) {
+        finalMovies = movies[movieIndex] 
+    } else {
+        finalMovies = ("please enter number below " + movies.length)
     }
-    let array1 = [1, 2, 3, 4];
-    let array2 = [5, 6, 3, 1];
-    let array3 = [7, 9, 6, 1];
-    let array4 = [13, 8, 5, 4];
-    let array5 = [8, 13, 9, 2];
-    console.log(unionFx(array1, array2, array3, array4, array5));
+res.send(finalMovies)
 
-    let movies = [["horror", "The Shining"], ["drama", "Titanic"], ["thriller", "Shutter Island"], ["fantasy", "Pans Labyrinth"]]
-    console.log(_.fromPairs(movies));
-    res.send('this is my first api')
+});
+
+// Problem No-4 
+
+router.get('/films', function (req, res) {
+
+    let arr = [ {
+        id: 1,
+        name: "The Shining",
+       }, {
+        id: 2,
+        name: "Incendies",
+       }, {
+        id: 3,
+        name: "Rang de Basanti",
+       }, {
+        id: 4,
+        name: "Finding Nemo",
+       }]
+
+res.send(arr)
+
+});
+
+// Problem No-5
+
+router.get('/films/:filmId', function (req, res) {
+
+    let arr = [ {
+        id: 1,
+        name: "The Shining",
+       }, {
+        id: 2,
+        name: "Incendies",
+       }, {
+        id: 3,
+        name: "Rang de Basanti",
+       }, {
+        id: 4,
+        name: "Finding Nemo",
+       }]
+       
+       filmIndex = req.params.filmId
+
+       function idLookup (x) {
+        return x.id ;
+    }
+    let getId = arr.map (idLookup)
+    
+       let finalFilm = " " 
+    
+       if ( filmIndex <= getId.length ) {
+           finalFilm = arr[filmIndex-1]
+       } else {
+           finalFilm = ( "Please enter number equal to or below := " + getId.length + ", Because no movie exists with the entered id")
+       }
+
+res.send(finalFilm)
+
 });
 
 
