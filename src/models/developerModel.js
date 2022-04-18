@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 let ObjectId = mongoose.Schema.Types.ObjectId
 
-const developerSchema = new mongoose.schema ({
+const developerSchema = new mongoose.Schema ({
 
     name : String,
     gender: {

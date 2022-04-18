@@ -14,8 +14,12 @@ const createDeveloper = async function (req, res) {
     res.send ({msg : savedDeveloper})
 }
 
-
+const scholarshipDevelopers = async function (req, res) {
+    let savedData = await developerModel.find({ $and: [ {gender: "female"}, { percentage: {$gte:"70"}} ] })
+    res.send({msg: savedData})
+}
 
 
 module.exports.createBatch = createBatch
 module.exports.createDeveloper = createDeveloper
+module.exports.scholarshipDevelopers = scholarshipDevelopers

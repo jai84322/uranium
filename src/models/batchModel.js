@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const batchSchema = new mongoose.schema ({
+const batchSchema = new mongoose.Schema ({
 
     name : String,
     size: Number,
