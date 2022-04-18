@@ -10,5 +10,7 @@ router.post('/developers', allcontroller.createDeveloper )
 
 router.get('/scholarshipDevelopers', allcontroller.scholarshipDevelopers )
 
+router.get('/getDevelopers', allcontroller.getDevelopers )
+
 
 module.exports = router;
