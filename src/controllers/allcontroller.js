@@ -1,6 +1,6 @@
 
 
-const timeIpRoute = async function (req, res){
+const timeIpRoute = function (req, res){
   
     const date = new Date()
     let dateAndTime = date.getFullYear() + "-" + (date.getMonth()+ 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
