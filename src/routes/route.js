@@ -1,18 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const userController= require("../controllers/userController")
 
-router.get("/test-me", function (req, res) {
-    res.send("My first ever api!")
-})
+const allcontroller = require('../controllers/allcontroller')
 
-router.post("/users", userController.createUser  )
+router.post("/createUser", allcontroller.createUser)
 
-router.post("/login", userController.loginUser)
+router.get("/getUser", allcontroller.getUser)
 
-//The userId is sent by front end
-router.get("/users/:userId", userController.getUserData)
 
-router.put("/users/:userId", userController.updateUser)
 
-module.exports = router;
+module.exports = router;  
