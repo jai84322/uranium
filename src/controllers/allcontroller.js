@@ -10,8 +10,13 @@ const createUser = async function (req, res) {
 module.exports.createUser = createUser
 
 const getUser = async function (req, res) {
-    let updateName = await testingModel.updateMany({name: ""}, {$set: {name: "abcd"}}, {new:true}).find()
-    res.send({msg: updateName})
+
+
+    let updateName = await testingModel.updateMany({name : "sandeep"}, {$set: {name: "abcd"}}, {new:true})
+    let newDoc = await testingModel.find()
+    res.send({msg: newDoc})
+
+
     // let data = req.params.id
     // let savedData = await testingModel.findOneAndUpdate({_id : data}, {$set: {name: "sagar"}}, {new:true})
     // res.send({msg: savedData})
