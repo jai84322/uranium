@@ -73,8 +73,15 @@ const loginUser = async function (req,res) {
   let checkEmail = req.body.email
   let checkPassword = req.body.password
   
+  if (!checkEmail) {
+    res.status(401).send({error : "email is missing"})
+  }
 
-  let user = await authorModel.findOne({ emailId: checkEmail, password: checkPassword });
+  if (!checkPassword) {
+    res.status(401).send({error : "password is missing"})
+  }
+
+  let user = await authorModel.findOne({ email: checkEmail, password: checkPassword });
  
   if(!user) {
     res.status(404).send({error : "check your email or password"})

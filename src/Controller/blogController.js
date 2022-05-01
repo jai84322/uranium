@@ -150,7 +150,7 @@ const deleteBlog = async (req, res) => {
 
 const deleteByParams = async (req, res) => {
   try {
-    let decodedToken = jwt.verify(req.headers["x-auth-token"],"functionup-uranium")
+    let decodedToken = jwt.verify(req.headers["x-api-key"],"functionup-uranium")
 
     let { authorsId, isPublished, tags, category, subcategory } = req.query
 
@@ -160,9 +160,9 @@ const deleteByParams = async (req, res) => {
         .status(404)
         .send({ error: 'Inavlid Input---Query shoud not be emplpty' })
     }
-
+    
     let deletedDoc = await blogModel.updateMany({
-      isDeleted: false, authorId: decodedToken.userId,$or: [
+      isDeleted: false, authorId: decodedToken.userId, $or: [{ authorId: authorsId },
       { isPublished: isPublished },
       { tags: tags },
       { category: category },

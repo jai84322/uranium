@@ -3,8 +3,8 @@ const blogModel = require("../models/blogModel")
 
 
 const authentication = async function (req, res, next) {
-    let token = req.headers["x-auth-token"]
-    if (!token) token = req.headers["X-Auth-Token"]
+    let token = req.headers["x-api-key"]
+    if (!token) token = req.headers["X-Api-key"]
 
     if (!token) {
         res.status(401).send({ error: "no token found" })
@@ -19,7 +19,7 @@ const authentication = async function (req, res, next) {
 }
 
 const deleteandUpdateBlogById=async(req,res,next)=>{
-    let token = req.headers["x-auth-token"||"X-Auth-Token"]
+    let token = req.headers["x-api-key"||"X-Api-key"]
     let decodedToken = jwt.verify(token,"functionup-uranium")
     let Id = req.params.blogsId
     if(Id.length!=24){
@@ -39,10 +39,10 @@ const deleteandUpdateBlogById=async(req,res,next)=>{
 
 
 const deleteBlogbyParams= async (req,res,next)=>{
-     let token = req.headers["x-auth-token" || "X-Auth-Token"]
+     let token = req.headers["x-api-key"||"X-Api-key"]
      let decodedToken = jwt.verify(token,"functionup-uranium")
-     let { authorId, isPublished, tags, category, subcategory } = req.query
-     let blog = await blogModel.find({$or:[{authorId:authorId},{isPublished:isPublished},{tags:tags}, {category:category}, {subcategory:subcategory}]})
+     let { authorsId, isPublished, tags, category, subcategory } = req.query
+     let blog = await blogModel.find({$or:[{authorId:authorsId},{isPublished:isPublished},{tags:tags}, {category:category}, {subcategory:subcategory}]})
      if(blog[0].authorId!=decodedToken.userId){
          res.status(401).send({ error: "you are not authourized to change other user document " })
      }
