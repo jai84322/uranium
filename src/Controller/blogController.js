@@ -57,7 +57,7 @@ const getBlogs = async (req, res) => {
 
     let blog = await blogModel.find({ 
       $and: [{isPublished: true}, {isDeleted: false}, data ]
-    })
+    }).populate("authorId");
     
     if (!blog[0]) {
       res.status(404).send({ err: 'data not found/ all deleted' })
